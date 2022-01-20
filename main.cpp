@@ -49,12 +49,10 @@ void ReadPersonSalary(double * salary) {
 Для ввода использовать разработанные ранее функции.
 Вывод через параметры по ссылке.
 */
-void ReadPersonData(string & name, unsigned short & age, string & salary) {
-    double doubleSalary;
+void ReadPersonData(string & name, unsigned short & age, double & salary) {
     name = ReadPersonName();
     age = ReadPersonAge();
-    ReadPersonSalary(&doubleSalary);
-    salary = to_string(doubleSalary);
+    ReadPersonSalary(& salary);
 }
 
 /*
@@ -63,14 +61,12 @@ void ReadPersonData(string & name, unsigned short & age, string & salary) {
 Для ввода использовать разработанные ранее функции.
 Вывод через параметры по ссылке.
 */
-void ReadPersonData(string& name, unsigned short& age, string& height, string& weight) {
+void ReadPersonData(string& name, unsigned short & age, unsigned short & height, unsigned short & weight) {
     name = ReadPersonName();
     age = ReadPersonAge();
     ReadPersonHeight();
-    height = to_string(personHeight);
-    unsigned short personWeight;
-    ReadPersonWeight(personWeight);
-    weight = to_string(personWeight);
+    height = personHeight;
+    ReadPersonWeight(weight);
 }
 
 /*
@@ -80,24 +76,21 @@ void ReadPersonData(string& name, unsigned short& age, string& height, string& w
 и через параметры по ссылке.
  */
 void WritePersonData(unsigned short age, string name, const string & height = "", const string & weight = "", const string & salary = "") {
-    if (!name.empty())
-        cout << name << endl;
+    cout << name << endl;
     cout << age << endl;
-    if (!height.empty())
-        cout << height << endl;
-    if (!weight.empty())
-        cout << weight << endl;
-    if (!salary.empty())
-        cout << salary << endl;
+    cout << height << endl;
+    cout << weight << endl;
+    cout << salary << endl;
 }
 
 // Функция main.
 int main() {
-    string name, height, weight, salary;
-    unsigned short age;
+    string name;
+    unsigned short age, height, weight;
+    double salary;
     ReadPersonData(name, age, salary);
-    WritePersonData(age, name, "", "", salary);
+    WritePersonData(age, name, "", "", to_string(salary));
     ReadPersonData(name, age, height, weight);
-    WritePersonData(age, name, height, weight);
+    WritePersonData(age, name, to_string(height), to_string(weight));
     return 0;
 }
